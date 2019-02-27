@@ -379,7 +379,7 @@ void MultiChannelMemorySystem::actual_update()
 		DEBUG("DRAMSim2 Clock Frequency ="<<clockDomainCrosser.clock1<<"Hz, CPU Clock Frequency="<<clockDomainCrosser.clock2<<"Hz"); 
 	}
 
-	if (currentClockCycle % EPOCH_LENGTH == 0)
+	if (SHOW_SIM_OUTPUT && currentClockCycle % EPOCH_LENGTH == 0)
 	{
 		(*csvOut) << "ms" <<currentClockCycle * tCK * 1E-6; 
 		for (size_t i=0; i<NUM_CHANS; i++)

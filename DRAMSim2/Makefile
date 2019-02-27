@@ -8,6 +8,7 @@ OPTFLAGS= -O0 -g
 endif
 endif
 CXXFLAGS+=$(OPTFLAGS)
+CXXFLAGS+= -g
 
 EXE_NAME=DRAMSim
 STATIC_LIB_NAME := libdramsim.a

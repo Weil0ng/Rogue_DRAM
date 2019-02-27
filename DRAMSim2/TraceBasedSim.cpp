@@ -271,13 +271,13 @@ void *parseTraceFileLine(string &line, uint64_t &addr, enum TransactionType &tra
 		//convert address string -> number
 		istringstream b(addressStr.substr(2)); //substr(2) chops off 0x characters
 		b >>hex>> addr;
-
+        
 		// parse command
-		if (cmdStr.compare("read") == 0)
+		if (cmdStr.compare("R") == 0)
 		{
 			transType=DATA_READ;
 		}
-		else if (cmdStr.compare("write") == 0)
+		else if (cmdStr.compare("W") == 0)
 		{
 			transType=DATA_WRITE;
 		}
@@ -286,10 +286,10 @@ void *parseTraceFileLine(string &line, uint64_t &addr, enum TransactionType &tra
 			ERROR("INVALID COMMAND '"<<cmdStr<<"'");
 			exit(-1);
 		}
-		if (SHOW_SIM_OUTPUT)
-		{
-			DEBUGN("ADDR='"<<hex<<addr<<dec<<"',CMD='"<<transType<<"'");//',DATA='"<<dataBuffer[0]<<"'");
-		}
+		//if (SHOW_SIM_OUTPUT)
+		//{
+		//	DEBUGN("ADDR='"<<hex<<addr<<dec<<"',CMD='"<<transType<<"'");//',DATA='"<<dataBuffer[0]<<"'");
+		//}
 
 		//parse data
 		//if we are running in a no storage mode, don't allocate space, just return NULL
@@ -377,7 +377,7 @@ int main(int argc, char **argv)
 	string pwdString;
 	string *visFilename = NULL;
 	unsigned megsOfMemory=2048;
-	bool useClockCycle=true;
+	bool useClockCycle=false;
 	
 	IniReader::OverrideMap *paramOverrides = NULL; 
 
@@ -475,14 +475,9 @@ int main(int argc, char **argv)
 	{
 		traceType = k6;
 	}
-	else if (temp=="misc")
-	{
-		traceType = misc;
-	}
 	else
 	{
-		ERROR("== Unknown Tracefile Type : "<<temp);
-		exit(0);
+		traceType = misc;
 	}
 
 
@@ -602,7 +597,7 @@ int main(int argc, char **argv)
 
 		(*memorySystem).update();
 	}
-
+    cout << "Simulation Done!" << endl;
 	traceFile.close();
 	memorySystem->printStats(true);
 	// make valgrind happy

@@ -63,8 +63,8 @@ using std::ostream;
 		#define PRINT(str)  { dramsim_log <<str<<std::endl; }
 		#define PRINTN(str) { dramsim_log <<str; }
 	#else
-		#define PRINT(str)  if(SHOW_SIM_OUTPUT) { std::cout <<str<<std::endl; }
-		#define PRINTN(str) if(SHOW_SIM_OUTPUT) { std::cout <<str; }
+		#define PRINT(str)  { std::cout <<str<<std::endl; }
+		#define PRINTN(str) { std::cout <<str; }
 	#endif
 #endif
 
