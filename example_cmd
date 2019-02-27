@@ -1,0 +1,3 @@
+# -c -1: runs to end of trace
+# -q: only print last stats
+./DRAMSim -t ~/2017_traces/998.specrand_is/998.specrand_is.trace.out -s system.ini.example -d ini/DDR3_micron_64M_8B_x4_sg15.ini -c -1 -q
