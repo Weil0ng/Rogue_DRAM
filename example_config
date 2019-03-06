@@ -1,0 +1,2 @@
+# Name         Distribution        Mean    Std      Unit     Lower     Upper     Lambda
+-tRP           Truncated_gaussian  2       1        None         0      None     lambda x: math.ceil(x) 

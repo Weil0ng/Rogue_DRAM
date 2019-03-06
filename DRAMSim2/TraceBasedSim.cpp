@@ -538,6 +538,9 @@ int main(int argc, char **argv)
 
 	for (size_t i=0;i<numCycles;i++)
 	{
+        if (traceFile.eof())
+            break;
+                
 		if (!pendingTrans)
 		{
 			if (!traceFile.eof())
