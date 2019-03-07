@@ -2,10 +2,13 @@
 
 # $1: dramsim2_root, $2: config_dir $3: trace_path
 echo "run DRAMSim2 for configs in $2"
+result_dir=$2/results/
+mkdir -p $result_dir
 for config in $(find $2 -type f);
 do
-    echo "running $config"
+    base_name=$(basename $config)
+    echo "running "
     # -c -1: runs to end of trace
     # -q: only print last stats
-    $1/DRAMSim -t $3 -s $1/system.ini.example -d $config -c -1 -q > $config\_out
+    $1/DRAMSim -t $3 -s $1/system.ini.example -d $config -c -1 -q > $result_dir/$base_name
 done
