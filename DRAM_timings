@@ -1,7 +1,14 @@
 # Name         Distribution         Range        Unit
-# ck, vdd: float
--tRCD      Truncated_gaussian      [6.67 - 10]   ns
--tRP       Truncated_gaussian      [5 - 10]      ns
--CL       Truncated_gaussian      [8.33 - 10]   ns
--tWR       Truncated_gaussian      [3.33 - 10]   ns
--tRTP      Truncated_gaussian      [2.5 - 5]     ns
+# Vdd tck truncated_Gaussian 1.5
+
+-tRCD      Binomial  [4 - 6]   ns
+-tRP       Binomial  [3 - 6]   ns
+-CL       Binomial  [5 - 6]   ns
+-tWR       Binomial  [2 - 6]   ns
+-tRTP      Binomial  [2 - 4]   ns
+
+# tRCD 10
+# tRP 10
+# CL 10
+# tWR 10
+# tRTR 5
