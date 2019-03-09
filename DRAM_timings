@@ -1,6 +1,7 @@
 # Name         Distribution         Range        Unit
+# ck, vdd: float
 -tRCD      Truncated_gaussian      [6.67 - 10]   ns
 -tRP       Truncated_gaussian      [5 - 10]      ns
--tCL       Truncated_gaussian      [8.33 - 10]   ns
+-CL       Truncated_gaussian      [8.33 - 10]   ns
 -tWR       Truncated_gaussian      [3.33 - 10]   ns
 -tRTP      Truncated_gaussian      [2.5 - 5]     ns

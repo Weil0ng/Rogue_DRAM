@@ -4,7 +4,7 @@
 echo "run DRAMSim2 for configs in $2"
 result_dir=$2/results/
 mkdir -p $result_dir
-for config in $(find $2 -type f);
+for config in $(find $2 -maxdepth 1 -type f);
 do
     base_name=$(basename $config)
     echo "running "
