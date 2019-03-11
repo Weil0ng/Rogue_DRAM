@@ -46,6 +46,8 @@ def addIOOptions(parser):
             help='Config files to construct distributions from.')
     parser.add_argument('--model-path', action='store', default='gpc_model',
             help='File path to dump gpc model from matlab.')
+    parser.add_argument('--output-path', action='store', default=None,
+            help='File path to simulation output.')
     parser.add_argument('--sample-path', action='store', default=None,
             help='File path to store samples.')
     parser.add_argument('--ini', action='store', default=None,

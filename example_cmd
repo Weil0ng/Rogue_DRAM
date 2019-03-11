@@ -1,8 +1,12 @@
 # Generating samples:
 # 1. cd generators/
-# 2. python gen_samples.py --config ../example_config --sample-path example_samples --gpc 3
+# 2. python gen_samples.py --config ../example_config --sample-path example_samples --model-path gpc_model.mod --gpc 3
 # 3. python gen_ini.py --ini ../DRAMSim2/ini/DDR3_micron_64M_8B_x4_sg15.ini --sample-path example_samples
 # 4. ../run_simulation.sh ../DRAMSim2/ DDR3_micron_64M_8B_x4_sg15.ini/ ../DRAMSim2/traces/k6_aoe_02_short.trc
 # 5. Results are written in corresponding files in DDR3_micron_64M_8B_x4_sg15.ini/results/
 # 6. ../read_simulation.sh ./DDR3_micron_64M_8B_x4_sg15.ini/results ./out.txt
 # 7. Y Results are written in Rogue_DRAM/generators/out.txt
+# 8. TRAIN GPC MODEL:
+#   8.1 python build_gpc_model.py --config ../example_config --sample-path example_samples --model-path gpc_model.mod --output-path ../out.txt --log debug, note that --config, --sample-path, --model-path should be identical to step 2.
+#   8.2 For each column in [--output-path], a seperate model will be trained and written into [--model-path]_column.tmod
+# 9. python eval_gpc_model.py --config ../example_config --sample-path PATH_TO_TEST_SAMPLES --model-path gpc_mode_0.tmod --output-path test --log debug, note that --config should be identical to step 2, --sample-path should have the same format as the training sample file, --model-path corresponds to one of the models trained in step 8.
