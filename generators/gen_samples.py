@@ -93,7 +93,7 @@ def gpc_sample(model_spec, order):
     with open(save_model_path, 'w') as f:
         print 'GPC model saved to {}'.format(save_model_path)
         pickle.dump(gpc_model, f)
-    f.close()
+        f.close()
     samples = {}
     for i in range(len(model_spec)):
         samples[model_spec[i][0]] = result[i]
