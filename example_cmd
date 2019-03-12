@@ -9,4 +9,8 @@
 # 8. TRAIN GPC MODEL:
 #   8.1 python build_gpc_model.py --config ../example_config --sample-path example_samples --model-path gpc_model.mod --output-path ../out.txt --log debug, note that --config, --sample-path, --model-path should be identical to step 2.
 #   8.2 For each column in [--output-path], a seperate model will be trained and written into [--model-path]_column.tmod
-# 9. python eval_gpc_model.py --config ../example_config --sample-path PATH_TO_TEST_SAMPLES --model-path gpc_mode_0.tmod --output-path test --log debug, note that --config should be identical to step 2, --sample-path should have the same format as the training sample file, --model-path corresponds to one of the models trained in step 8.
+# 9. Generate MC samples:
+#   9.1 python gen_samples.py --config ../example_config --sample-path test_samples --N 100 --log debug
+# 10. EVALUATE:
+#   10.1 python eval_gpc_model.py --config ../example_config --sample-path test_samples --model-path gpc_mode_0.tmod --output-path test --log debug, note that --config should be identical to step 2, --sample-path should have the same format as the training sample file, --model-path corresponds to one of the models trained in step 8.
+
