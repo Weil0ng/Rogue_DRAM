@@ -90,10 +90,11 @@ class GPCRS(ResponseSurface):
         assert model_path
 
         self.model_path = model_path
-        with open(model_path, 'r') as f:
+        with open(model_path, 'rb') as f:
             logging.debug('loading model from: {}'.format(model_path))
             self.model = pickle.load(f)
             logging.debug('model loaded')
+            f.close()
 
     def get_moments(self):
         assert self.model
@@ -150,7 +151,7 @@ class GPCRS(ResponseSurface):
             logging.debug('training for col {}, lebels: {}'.format(col, y))
             self.model = self.engine.gpc_model(self.model, y)
             save_model_path = self.model_path[:self.model_path.rfind(r'.mod')] + '_' + str(col) + '.tmod'
-            with open(save_model_path, 'w') as f:
+            with open(save_model_path, 'wb') as f:
                 pickle.dump(self.model, f)
                 print 'COL {}: trained model pickled to {}'.format(col, save_model_path)
 

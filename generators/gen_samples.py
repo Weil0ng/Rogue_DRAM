@@ -90,7 +90,7 @@ def gpc_sample(model_spec, order):
     logging.debug('gpc sample with spec: {}'.format(model_spec))
     result, gpc_model = engine.gpc_sample(model_spec, order, nargout=2)
     save_model_path = args.model_path
-    with open(save_model_path, 'w') as f:
+    with open(save_model_path, 'wb') as f:
         print 'GPC model saved to {}'.format(save_model_path)
         pickle.dump(gpc_model, f)
         f.close()
