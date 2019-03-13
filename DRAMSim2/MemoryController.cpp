@@ -808,6 +808,8 @@ void MemoryController::printStats(bool finalStats)
 	//if we are not at the end of the epoch, make sure to adjust for the actual number of cycles elapsed
 
 	uint64_t cyclesElapsed = (currentClockCycle % EPOCH_LENGTH == 0) ? EPOCH_LENGTH : currentClockCycle % EPOCH_LENGTH;
+    if (finalStats)
+        cyclesElapsed = currentClockCycle;
 	unsigned bytesPerTransaction = (JEDEC_DATA_BUS_BITS*BL)/8;
 	uint64_t totalBytesTransferred = totalTransactions * bytesPerTransaction;
 	double secondsThisEpoch = (double)cyclesElapsed * tCK * 1E-9;
@@ -843,8 +845,11 @@ void MemoryController::printStats(bool finalStats)
 	cout.setf(ios::fixed,ios::floatfield);
 #endif
 
+    // weil0ng: totalBandwidth should be the grand total average, not just for this epoch.
+    // totalBandwidth = float(totalBytesTransferred/(1024.0*1024.0*1024.0)) / (currentClockCycle * tCK * 1E-9);
 	PRINT( " =======================================================" );
 	PRINT( " ============== Printing Statistics [id:"<<parentMemorySystem->systemID<<"]==============" );
+    PRINT( "   Total Time (ns): " << currentClockCycle * tCK);
 	PRINTN( "   Total Return Transactions : " << totalTransactions );
 	PRINT( " ("<<totalBytesTransferred <<" bytes) aggregate average bandwidth "<<totalBandwidth<<"GB/s");
 
