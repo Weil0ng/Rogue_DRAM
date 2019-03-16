@@ -536,6 +536,8 @@ int main(int argc, char **argv)
 		exit(0);
 	}
 
+    uint64_t cur_cnt = 0;
+
 	for (size_t i=0;i<numCycles;i++)
 	{
         if (traceFile.eof())
@@ -546,7 +548,6 @@ int main(int argc, char **argv)
 			if (!traceFile.eof())
 			{
 				getline(traceFile, line);
-
 				if (line.size() > 0)
 				{
 					data = parseTraceFileLine(line, addr, transType,clockCycle, traceType,useClockCycle);

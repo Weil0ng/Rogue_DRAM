@@ -51,6 +51,7 @@ Rank::Rank(ostream &dramsim_log_) :
 	memoryController = NULL;
 	outgoingDataPacket = NULL;
 	dataCyclesLeft = 0;
+    grandTotalDataCycles = 0;
 	currentClockCycle = 0;
 
 #ifndef NO_STORAGE
@@ -326,6 +327,7 @@ void Rank::update()
 
 		outgoingDataPacket = readReturnPacket[0];
 		dataCyclesLeft = BL/2;
+        grandTotalDataCycles += dataCyclesLeft;
 
 		// remove the packet from the ranks
 		readReturnPacket.erase(readReturnPacket.begin());

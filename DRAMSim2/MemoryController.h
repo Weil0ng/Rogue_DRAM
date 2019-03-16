@@ -101,6 +101,8 @@ private:
 	unsigned cmdCyclesLeft;
 	BusPacket *outgoingDataPacket;
 	unsigned dataCyclesLeft;
+    // weil0ng
+    uint64_t grandTotalDataCycles;
 
 	uint64_t totalTransactions;
 	vector<uint64_t> grandTotalBankAccesses; 

@@ -66,6 +66,7 @@ MemoryController::MemoryController(MemorySystem *parent, CSVWriter &csvOut_, ost
 		commandQueue(bankStates, dramsim_log_),
 		poppedBusPacket(NULL),
 		csvOut(csvOut_),
+        grandTotalDataCycles(0),
 		totalTransactions(0),
 		refreshRank(0)
 {
@@ -229,7 +230,9 @@ void MemoryController::update()
 	{
 		for (size_t i=0;i<writeDataCountdown.size();i++)
 		{
-			writeDataCountdown[i]--;
+            // weil0ng
+            if (writeDataCountdown[i] > 0)
+			    writeDataCountdown[i]--;
 		}
 
 		if (writeDataCountdown[0]==0)
@@ -250,6 +253,7 @@ void MemoryController::update()
 
 			outgoingDataPacket = writeDataToSend[0];
 			dataCyclesLeft = BL/2;
+            grandTotalDataCycles += dataCyclesLeft;
 
 			totalTransactions++;
 			totalWritesPerBank[SEQUENTIAL(writeDataToSend[0]->rank,writeDataToSend[0]->bank)]++;
@@ -828,6 +832,7 @@ void MemoryController::printStats(bool finalStats)
 	double totalBandwidth=0.0;
 	for (size_t i=0;i<NUM_RANKS;i++)
 	{
+        grandTotalDataCycles += (*ranks)[i]->grandTotalDataCycles;
 		for (size_t j=0; j<NUM_BANKS; j++)
 		{
 			bandwidth[SEQUENTIAL(i,j)] = (((double)(totalReadsPerBank[SEQUENTIAL(i,j)]+totalWritesPerBank[SEQUENTIAL(i,j)]) * (double)bytesPerTransaction)/(1024.0*1024.0*1024.0)) / secondsThisEpoch;
@@ -849,6 +854,7 @@ void MemoryController::printStats(bool finalStats)
     // totalBandwidth = float(totalBytesTransferred/(1024.0*1024.0*1024.0)) / (currentClockCycle * tCK * 1E-9);
 	PRINT( " =======================================================" );
 	PRINT( " ============== Printing Statistics [id:"<<parentMemorySystem->systemID<<"]==============" );
+    PRINT( "   DBUS utilization: " << 100 * float(grandTotalDataCycles)/currentClockCycle << "%" << " Total Data Cycles: " << grandTotalDataCycles);
     PRINT( "   Total Time (ns): " << currentClockCycle * tCK);
 	PRINTN( "   Total Return Transactions : " << totalTransactions );
 	PRINT( " ("<<totalBytesTransferred <<" bytes) aggregate average bandwidth "<<totalBandwidth<<"GB/s");

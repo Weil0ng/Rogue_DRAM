@@ -72,6 +72,8 @@ public:
 	MemoryController *memoryController;
 	BusPacket *outgoingDataPacket;
 	unsigned dataCyclesLeft;
+    // weil0ng
+    uint64_t grandTotalDataCycles;
 	bool refreshWaiting;
 
 	//these are vectors so that each element is per-bank
