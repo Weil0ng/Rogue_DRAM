@@ -862,8 +862,11 @@ void MemoryController::printStats(bool finalStats)
 	double totalAggregateBandwidth = 0.0;	
 	for (size_t r=0;r<NUM_RANKS;r++)
 	{
-
+        double grandAverageLatency = 0.0;
+        for (size_t j=0; j< NUM_BANKS; j++)
+            grandAverageLatency += averageLatency[SEQUENTIAL(r, j)];
 		PRINT( "      -Rank   "<<r<<" : ");
+        PRINT( "         -Average latency : "<<grandAverageLatency/NUM_BANKS << " (ns)");
 		PRINTN( "        -Reads  : " << totalReadsPerRank[r]);
 		PRINT( " ("<<totalReadsPerRank[r] * bytesPerTransaction<<" bytes)");
 		PRINTN( "        -Writes : " << totalWritesPerRank[r]);
