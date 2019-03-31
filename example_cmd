@@ -1,8 +1,8 @@
 # Generating samples:
 # 1. cd generators/
 # 2. python gen_samples.py --config ../example_config --sample-path example_samples --model-path gpc_model.mod --gpc 3
-# 3. python gen_ini.py --ini ../DRAMSim2/ini/DDR3_micron_64M_8B_x4_sg15.ini --sample-path example_samples
-# 4. ../run_simulation.sh ../DRAMSim2/ DDR3_micron_64M_8B_x4_sg15.ini/ ../DRAMSim2/traces/k6_aoe_02_short.trc [TAG]
+# 3. python gen_ini.py --ini ../DRAMSim2/ini/DDR3_micron_64M_8B_x4_sg15.ini --sample-path example_samples --output-path [output_dir_name]
+# 4. ../run_simulation.sh ../DRAMSim2/ [output_dir_name] ../DRAMSim2/traces/k6_aoe_02_short.trc [TAG]
 # 5. Results are written in corresponding files in DDR3_micron_64M_8B_x4_sg15.ini/results/
 # 6. ../read_simulation.sh ./DDR3_micron_64M_8B_x4_sg15.ini/results ./out.txt
 # 7. Y Results are written in Rogue_DRAM/generators/out.txt

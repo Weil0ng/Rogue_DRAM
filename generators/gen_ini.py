@@ -22,7 +22,7 @@ def read_samples(sample_path):
     values = [[float(re.sub(r'[^0-9\.]', '', w)) for w in l.split()[1::2]] for l in lines]
     return dict([(p, vs) for p, vs in zip(params, zip(*values))])
 
-def gen_inis(sample_path, ini_template):
+def gen_inis(sample_path, ini_template, output_path):
 
     samples = read_samples(sample_path)
     logging.debug('samples: {}'.format(samples))
@@ -48,7 +48,7 @@ def gen_inis(sample_path, ini_template):
     
     # Make persistent.
     template_base_name = ini_template[ini_template.rfind('/')+1:]
-    dest = os.getcwd() + '/' + template_base_name
+    dest = os.getcwd() + '/' + output_path
     if not os.path.exists(dest):
         os.mkdir(dest)
     for i, config in enumerate(configs):
@@ -64,9 +64,9 @@ def main():
     addIOOptions(parser)
     args = parse_args(parser)
     
-    assert args.sample_path and args.ini, \
-            'Must specify --sample-path and --ini'
-    gen_inis(args.sample_path, args.ini)
+    assert args.sample_path and args.ini and args.output_path, \
+            'Must specify --sample-path, --ini and --output-path'
+    gen_inis(args.sample_path, args.ini, args.output_path)
 
 if __name__ == '__main__':
     main()
